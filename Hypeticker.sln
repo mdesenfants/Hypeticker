@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hypeticker", "Hypeticker\Hy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HypetickerTest", "HypetickerTest\HypetickerTest.csproj", "{B4BE496F-68C7-4D6F-A730-4E52028E995D}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HypetickerDB", "HypetickerDB\HypetickerDB.sqlproj", "{DB9B3A42-55D2-444C-8FAB-1ACC2E488435}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{B4BE496F-68C7-4D6F-A730-4E52028E995D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4BE496F-68C7-4D6F-A730-4E52028E995D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4BE496F-68C7-4D6F-A730-4E52028E995D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB9B3A42-55D2-444C-8FAB-1ACC2E488435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB9B3A42-55D2-444C-8FAB-1ACC2E488435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB9B3A42-55D2-444C-8FAB-1ACC2E488435}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DB9B3A42-55D2-444C-8FAB-1ACC2E488435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB9B3A42-55D2-444C-8FAB-1ACC2E488435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB9B3A42-55D2-444C-8FAB-1ACC2E488435}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

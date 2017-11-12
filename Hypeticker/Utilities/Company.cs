@@ -3,9 +3,9 @@ using System.Text;
 
 namespace Hypeticker.Utilities
 {
-    public static class ProductMatcher
+    public static class Company
     {
-        private static string[] consonants = new string[] { "b", "d", "f", "h", "j", "k", "l", "m", "n", "p", "r", "s", "t", "v", "w", "x", "z", "th", "ch", "kr", "tr", "br", "fr", "gr", "mr", "nr", "sh" };
+        private static string[] consonants = new string[] { "b", "d", "f", "h", "j", "k", "l", "m", "n", "p", "r", "s", "t", "v", "w", "x", "z", "th", "ch", "kr", "tr", "br", "fr", "gr", "sh", "pr", "shr", "hr" };
         private static string[] vowels = new string[] { "a", "e", "i", "o", "u", "ae", "ie", "oi", "ea", "oo", "ou", "yi" };
 
         public static string GetCompany(string input)

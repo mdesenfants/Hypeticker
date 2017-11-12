@@ -9,7 +9,7 @@ namespace HypetickerTest
         [TestMethod]
         public void CompanyNameTest()
         {
-            var result = ProductMatcher.GetCompany("kindred");
+            var result = Company.GetCompany("kindred of 叱 and 𠮟 (2016) (namakajiri.net)");
             Assert.IsFalse(string.IsNullOrWhiteSpace(result));
         }
     }
