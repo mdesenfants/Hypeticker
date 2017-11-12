@@ -1,9 +1,8 @@
 using Hypeticker.Models;
+using Hypeticker.Utilities;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Hypeticker.Functions
 {
@@ -15,13 +14,7 @@ namespace Hypeticker.Functions
             [Queue("profits", Connection = "AzureWebJobsStorage")]ICollector<WordShare> collector,
             TraceWriter log)
         {
-            var words = input.Title.Replace('-', ' ').Split(null);
-
-            var clean = words
-                .Select(w => Clean(w))
-                .Where(c => !string.IsNullOrWhiteSpace(c) && c.Length > 2);
-
-            var unique = new HashSet<string>(clean);
+            var unique = Company.GetUniqueWords(input.Title);
             var length = unique.Count();
 
             foreach (var word in unique)
@@ -37,17 +30,6 @@ namespace Hypeticker.Functions
                     WordCount = length
                 });
             }
-        }
-
-        private static string Clean(string word)
-        {
-            var builder = new StringBuilder(word.Length);
-            foreach (var c in word.Where(c => char.IsLetter(c)))
-            {
-                builder.Append(char.ToLower(c));
-            }
-
-            return builder.ToString();
         }
     }
 }

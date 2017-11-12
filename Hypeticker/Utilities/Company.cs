@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Hypeticker.Utilities
@@ -6,7 +8,7 @@ namespace Hypeticker.Utilities
     public static class Company
     {
         private static string[] consonants = new string[] { "b", "d", "f", "h", "j", "k", "l", "m", "n", "p", "r", "s", "t", "v", "w", "x", "z", "th", "ch", "kr", "tr", "br", "fr", "gr", "sh", "pr", "shr", "hr" };
-        private static string[] vowels = new string[] { "a", "e", "i", "o", "u", "ae", "ie", "oi", "ea", "oo", "ou", "yi" };
+        private static string[] vowels = new string[] { "a", "e", "i", "o", "u" };
 
         public static string GetCompany(string input)
         {
@@ -30,6 +32,29 @@ namespace Hypeticker.Utilities
             }
 
             return value.ToString().ToUpper();
+        }
+
+        public static HashSet<string> GetUniqueWords(string input)
+        {
+            var words = input.Replace('-', ' ').Split(null);
+
+            var clean = words
+                .Select(w => Clean(w))
+                .Where(c => !string.IsNullOrWhiteSpace(c));
+
+            var unique = new HashSet<string>(clean);
+            return unique;
+        }
+
+        private static string Clean(string word)
+        {
+            var builder = new StringBuilder(word.Length);
+            foreach (var c in word.Where(c => char.IsLetter(c) || c == '\''))
+            {
+                builder.Append(char.ToLower(c));
+            }
+
+            return builder.ToString();
         }
     }
 }
