@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -12,7 +11,7 @@ namespace Hypeticker.Utilities
 
         public static string GetCompany(string input)
         {
-            var hash = Math.Abs(input.ToLower().GetHashCode());
+            var hash = input.ToLower().GetHashCode() % 300;
             int sum = 0;
             var value = new StringBuilder(2 * sizeof(int));
 
