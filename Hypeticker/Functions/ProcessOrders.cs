@@ -19,8 +19,8 @@ namespace Hypeticker.Functions
 
             var prams = new
             {
-                trader = 2, //order.User,
-                word = 1, // order.Company,
+                trader = order.User,
+                word = order.Company,
                 quantity = order.Quantity,
                 price = order.Price,
                 ticket = order.Id
