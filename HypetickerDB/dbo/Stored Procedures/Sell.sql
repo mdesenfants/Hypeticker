@@ -30,7 +30,7 @@ AS
 		else set @available = @quantity
 
 		-- get matching buy orders
-		select top (@available) id, Price, TraderId
+		select top (@available) Id, Price, TraderId
 		into #buys
 		from Trades
 		where
@@ -77,7 +77,8 @@ AS
 				Created,
 				Expires,
 				Type,
-				Price
+				Price,
+				Ticket
 			)
 			values (
 				@trader,
@@ -85,7 +86,8 @@ AS
 				@time,
 				DATEADD(HOUR, CASE WHEN @trader is null THEN 168 ELSE 1 END, @time),
 				0,
-				@price
+				@price,
+				@ticket
 			)
 			select @available = @available - 1
 		end

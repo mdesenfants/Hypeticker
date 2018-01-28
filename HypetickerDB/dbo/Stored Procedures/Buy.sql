@@ -68,8 +68,8 @@ AS
 		-- store remaining buy orders
 		while (@available >= @price and @quantity > 0)
 		begin
-			insert into Trades (TraderId, WordId, Created, Expires, Type, Price)
-			values (@trader, @word, @time, DATEADD(HOUR, 1, @time), 1, @price)
+			insert into Trades (TraderId, WordId, Created, Expires, Type, Price, Ticket)
+			values (@trader, @word, @time, DATEADD(HOUR, 1, @time), 1, @price, @ticket)
 			
 			set @available = @available - @price
 			set @quantity = @quantity - 1

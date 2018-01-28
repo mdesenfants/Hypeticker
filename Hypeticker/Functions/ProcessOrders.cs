@@ -2,7 +2,7 @@ using Hypeticker.Models;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using System.Threading.Tasks;
-using static Hypeticker.Utilities.SqlUtilities;
+using static Hypeticker.Utilities.SqlExec;
 
 namespace Hypeticker.Functions
 {
@@ -15,12 +15,12 @@ namespace Hypeticker.Functions
         {
             log.Info($"C# Queue trigger function processed: {order}");
 
-            var ot = order.OrderType == OrderType.Buy ? "[dbo].[Buy]" : "[dbo].[Sell]";
+            var ot = order.OrderType != OrderType.Buy ? "[dbo].[Buy]" : "[dbo].[Sell]";
 
             var prams = new
             {
-                trader = order.User,
-                word = order.Company,
+                trader = 2, //order.User,
+                word = 1, // order.Company,
                 quantity = order.Quantity,
                 price = order.Price,
                 ticket = order.Id

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hypeticker.Utilities
 {
-    public static class SqlUtilities
+    public static class SqlExec
     {
         public static async Task<T> RunSqlAsync<T>(Func<SqlConnection, Task<T>> app)
         {
@@ -15,13 +15,14 @@ namespace Hypeticker.Utilities
             using (SqlConnection conn = new SqlConnection(str))
             {
                 await conn.OpenAsync();
+
                 return await app(conn);
             }
         }
 
         public static async Task<int> RunStoredProc(string spName, object parameters)
         {
-            async Task<int> sp(SqlConnection conn) => await conn.ExecuteAsync($"exec {spName}", parameters, commandType: CommandType.StoredProcedure);
+            async Task<int> sp(SqlConnection conn) => await conn.ExecuteAsync(spName, param: parameters, commandType: CommandType.StoredProcedure);
             return await RunSqlAsync<int>(sp);
         }
     }
