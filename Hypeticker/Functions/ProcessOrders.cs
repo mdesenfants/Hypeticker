@@ -1,32 +1,32 @@
 using Hypeticker.Models;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
-using System.Data.SqlClient;
 using System.Threading.Tasks;
+using static Hypeticker.Utilities.SqlUtilities;
 
 namespace Hypeticker.Functions
 {
     public static class ProcessOrders
     {
         [FunctionName("ProcessOrders")]
-        public static async Task Run([QueueTrigger("profits", Connection = "AzureWebJobsStorage")]Order myQueueItem, TraceWriter log)
+        public static async Task Run(
+            [QueueTrigger("order", Connection = "AzureWebJobsStorage")]Order order,
+            TraceWriter log)
         {
-            log.Info($"C# Queue trigger function processed: {myQueueItem}");
+            log.Info($"C# Queue trigger function processed: {order}");
 
-            var str = ConfigurationManager.ConnectionStrings["sqldb_connection"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(str))
+            var ot = order.OrderType == OrderType.Buy ? "[dbo].[Buy]" : "[dbo].[Sell]";
+
+            var prams = new
             {
-                conn.Open();
-                var text = "UPDATE SalesLT.SalesOrderHeader " +
-                        "SET [Status] = 5  WHERE ShipDate < GetDate();";
+                trader = order.User,
+                word = order.Company,
+                quantity = order.Quantity,
+                price = order.Price,
+                ticket = order.Id
+            };
 
-                using (SqlCommand cmd = new SqlCommand(text, conn))
-                {
-                    // Execute the command and log the # rows affected.
-                    var rows = await cmd.ExecuteNonQueryAsync();
-                    log.Info($"{rows} rows were updated");
-                }
-            }
+            await RunStoredProc(ot, prams);
         }
     }
 }

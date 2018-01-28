@@ -6,6 +6,7 @@
     [Expires]  DATETIME DEFAULT (dateadd(hour,(1),getutcdate())) NOT NULL,
     [Type]     INT      NOT NULL,
     [Price]    INT      NOT NULL,
+    [Ticket] UNIQUEIDENTIFIER NOT NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC),
     FOREIGN KEY ([TraderId]) REFERENCES [dbo].[Traders] ([Id]),
     FOREIGN KEY ([WordId]) REFERENCES [dbo].[Traders] ([Id])

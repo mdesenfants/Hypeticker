@@ -1,11 +1,9 @@
-﻿
-
-
-CREATE PROCEDURE [dbo].[Sell]
+﻿CREATE PROCEDURE [dbo].[Sell]
 	@trader int = null,
 	@word int,
 	@quantity int,
-	@price int
+	@price int,
+	@ticket uniqueidentifier
 AS
 	begin transaction
 		declare @time datetime

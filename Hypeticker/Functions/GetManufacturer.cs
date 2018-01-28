@@ -17,7 +17,7 @@ namespace Hypeticker.Functions
             string name,
             TraceWriter log)
         {
-            log.Info("C# HTTP trigger function processed a request.");
+            log.Info($"Processing [{name}] into manufacturer name(s).");
 
             var mappings = from word in GetUniqueWords(name)
                            select new KeyValuePair<string, string>(GetCompany(word), word);
