@@ -21,7 +21,7 @@ namespace Hypeticker.Utilities
 
         public static async Task<int> RunStoredProc(string spName, object parameters)
         {
-            Func<SqlConnection, Task<int>> sp = async (conn) => await conn.ExecuteAsync($"exec {spName}", parameters, commandType: CommandType.StoredProcedure);
+            async Task<int> sp(SqlConnection conn) => await conn.ExecuteAsync($"exec {spName}", parameters, commandType: CommandType.StoredProcedure);
             return await RunSqlAsync<int>(sp);
         }
     }
